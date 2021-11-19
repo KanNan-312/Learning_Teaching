@@ -20,7 +20,7 @@
     width: 200px;
     float: left;
 }
-/* Navigation bar */
+/* End navigation bar */
 
 
 /* Login page */
@@ -50,3 +50,15 @@
     font-size: 60px;
 }
 /* End login page */
+
+/* Course page */
+.course-container {
+    padding: 50px 50px 0 50px;
+}
+
+.course-box {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 5px;
+    padding: 5px;
+}
+/* End course page */

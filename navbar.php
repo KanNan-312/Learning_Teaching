@@ -2,7 +2,7 @@
 	<div class="container-fluid" >
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a class="nav-link" href="#">Courses</a>
+				<a class="nav-link" href="index.php?page=course">Courses</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="#">Register</a>
