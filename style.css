@@ -1,0 +1,52 @@
+.login-page-container {
+    padding: 50px 100px 0 100px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("background.jpg");
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%, 100%;
+}
+
+.page-container {
+    padding-left: 200px;
+}
+
+/* Navigation bar */
+.navbar {
+    background-color: black;
+    height: 100%;
+    width: 200px;
+    float: left;
+}
+/* Navigation bar */
+
+
+/* Login page */
+.bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 60%;
+    padding: 20px;
+}
+
+.login-header {
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-size: 60px;
+}
+/* End login page */
