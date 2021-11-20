@@ -3,7 +3,8 @@
 	<hr>
 	<div class="row">
 		<?php
-			$sql = "CALL GetListOfSubjectsOfSemester(" . $semester . ")";
+			$id = '1952001';
+			$sql = "CALL showStudentCourse(".$id . ",". $semester . ")";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 				// output data of each row
@@ -11,9 +12,9 @@
 					echo "
 						<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
 							<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
-								<p><b>Name: " . $row['Name'] . "</b></p>
+								<p><b>" . $row['Subject'] . "(" . $row['Subject_id'] . ")</b></p>
 								<hr>
-								<p>Code: " . $row['Code'] . "</p>
+								<p>Class code: " . $row['Code'] . "</p>
 							</a></div>
 						</div>
 					";
