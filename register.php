@@ -7,19 +7,12 @@
 		if($flag) {
 			$student_id = $_SESSION["id"];
 			$sql = "call studentCancel('$credits', '$id', '$class');";
-			echo "ez";
-			if(!$result = $conn->query($sql)) {
-				die($result->error);
-			}
-
+			$result = $conn->query($sql);
 		}
 		else {
 			$student_id = $_SESSION["id"];
 			$sql = "call studentRegister('$credits', '$id', '$class');";
-			echo "no ez";
-			if(!$result = $conn->query($sql)) {
-				die($result->error);
-			}
+			$result = $conn->query($sql);
 		}
 	}
 ?>
