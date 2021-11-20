@@ -1,64 +1,131 @@
+.no-style-hyperlink {
+	color: inherit;
+	text-decoration: inherit;
+}
+
 .login-page-container {
-    padding: 50px 100px 0 100px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("background.jpg");
-    background-attachment: fixed;
-    height: 100%;
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100%, 100%;
+	padding: 50px 100px 0 100px;
+	background: black;
+	background-attachment: fixed;
+	height: 100%;
+	margin: 0;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%, 100%;
 }
 
 .page-container {
-    padding-left: 200px;
+		padding-left: 200px;
 }
 
 /* Navigation bar */
 .navbar {
-    background-color: black;
-    height: 100%;
-    width: 200px;
-    float: left;
+	background-color: black;
+	height: 100%;
+	width: 200px;
+	float: left;
 }
 /* End navigation bar */
 
 
 /* Login page */
 .bg-text {
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-    color: white;
-    font-weight: bold;
-    border: 3px solid #f1f1f1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    width: 60%;
-    padding: 20px;
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+	color: white;
+	font-weight: bold;
+	border: 3px solid #f1f1f1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	width: 60%;
+	padding: 20px;
 }
 
 .login-header {
-    color: white;
-    font-weight: bold;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    font-size: 60px;
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	font-size: 60px;
 }
 /* End login page */
 
 /* Course page */
+.course-select-semester {
+
+}
+
+.select-dropdown,
+.select-dropdown * {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	box-sizing: border-box;
+}
+.select-dropdown {
+	position: relative;
+	background-color: #E6E6E6;
+	border-radius: 4px;
+}
+.select-dropdown select {
+	font-size: 1rem;
+	font-weight: normal;
+	width: 100%;
+	padding: 8px 24px 8px 10px;
+	border: none;
+	background-color: transparent;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.select-dropdown select:active, .select-dropdown select:focus {
+	outline: none;
+	box-shadow: none;
+}
+.select-dropdown:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 8px;
+	width: 0;
+	height: 0;
+	margin-top: -2px;
+	border-top: 5px solid #aaa;
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+}
+
 .course-container {
-    padding: 50px 50px 0 50px;
+	padding: 50px 50px 0 50px;
 }
 
 .course-box {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 5px;
-    padding: 5px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	margin: 5px;
+	padding: 10px 10px 5px 10px;
+	border-radius: 15px;
+	top: 50%;
 }
+
 /* End course page */
+
+/* Course info page */
+.info-container {
+	padding: 30px 50px 0 50px;
+	font-size: 30px;
+	
+}
+.info-header {
+	float: left;
+}
+.info-value {
+	float: left;
+	margin-left: 10px;
+}
+/* End course info page */

@@ -11,7 +11,7 @@
         </div>
         <div style="text-align: center">
             <p id="wrong-info-alert" style="color: red;"></p>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary" style="background-color: white; border: none; color: black;">Login</button>
         </div>
     </form>
 </div>

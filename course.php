@@ -27,20 +27,25 @@
 	});
 </script>
 <div class="course-container">
-	<select id="dynamic_select">
-		<option value="" selected>Choose semester</option>
-		<?php
-			$sql = "SELECT DISTINCT Semester FROM CLASS ORDER BY Semester DESC";
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					echo "
-						<option value='index.php?page=course&semester=" . $row["Semester"] . "'>" . $row["Semester"] . "</option>
-					";
+	<p style="float: left; margin-right: 10px; font-size: 30px;"><b>Current semester:</b></p>
+	<p style="font-size: 30px;"><?php echo $semester ?>
+	<div class="select-dropdown">
+		<select id="dynamic_select">
+			<option value="" selected>Choose semester</option>
+			<?php
+				$sql = "SELECT DISTINCT Semester FROM CLASS ORDER BY Semester DESC";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					while($row = $result->fetch_assoc()) {
+						echo "
+							<option value='index.php?page=course&semester=" . $row["Semester"] . "'>" . $row["Semester"] . "</option>
+						";
+					}
 				}
-			}
-		?>
-	</select>
+			?>
+		</select>
+	</div>
+	<hr>
 	<div class="row">
 		<?php
 			$sql = "CALL GetListOfSubjectsOfSemester(" . $semester . ")";
@@ -50,10 +55,11 @@
 				while($row = $result->fetch_assoc()) {
 					echo "
 						<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
-							<div class='course-box'>
-								<p>Name: " . $row['Name'] . "</p>
+							<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
+								<p><b>Name: " . $row['Name'] . "</b></p>
+								<hr>
 								<p>Code: " . $row['Code'] . "</p>
-							</div>
+							</a></div>
 						</div>
 					";
 				}
