@@ -5,10 +5,10 @@
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?page=home"><i class="fa fa-home" style="margin-right: 10px;"></i>Home</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="index.php?page=course"><i class="fa fa-list" style="margin-right: 10px;"></i>Courses</a>
+			</li>
 			<?php if($_SESSION["role"] == "student") {?>
-				<li class="nav-item">
-					<a class="nav-link" href="index.php?page=course"><i class="fa fa-list" style="margin-right: 10px;"></i>Courses</a>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="index.php?page=register"><i class="fa fa-book" style="margin-right: 10px;"></i>Register</a>
 				</li>
