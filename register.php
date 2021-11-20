@@ -1,6 +1,5 @@
 <div class="course-container">
-	<?php include "choose_semester.php" ?>
-	<hr>
+	<p style="font-size: 30px;"> Semester 211 </p>
 	<table id="register">
 	<tr>
 		<th>Class</th>
@@ -9,9 +8,7 @@
 		<th>Select</th>
 	</tr>
 	<?php
-		$sql = 'select c.code as "Class", s.name as "Subject", s.num_credits as "Credits" 
-		from class c, subject s
-		where c.subject_code = s.code and c.semester = "202" limit 4;';
+		$sql = 'call showRegisterPage()';
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {

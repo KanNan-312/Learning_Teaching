@@ -1,24 +1,23 @@
 <?php
-    // $wrong_cred = "";
-    // if(isset($_POST["id"]) and isset($_POST["password"])) {
-    //     $usr_id = $_POST["id"];
-    //     $usr_pwd = $_POST["password"];
-    //     $sql = "SELECT * FROM Users WHERE id = '$usr_id' AND password = '$usr_pwd'";
-    //     $result = mysqli_query($conn, $sql);
-    //     if(mysqli_num_rows($result) === 1) {
-    //         $row = mysqli_fetch_assoc($result);
-    //         $_SESSION["id"] = $usr_id;
-    //         $_SESSION["user_real_name"] = $row["name"];
-    //         $_SESSION["role"] = $row["Role"];
-    //         echo "
-    //             <script>window.location.href = 'index.php?page=home';</script>;
-    //         ";
-    //     }
-    //     else {
-    //         $wrong_cred = "Wrong id or password.";
-    //     }
-    // }
-    $_SESSION["id"] = '123';
+    $wrong_cred = "";
+    if(isset($_POST["id"]) and isset($_POST["password"])) {
+        $usr_id = $_POST["id"];
+        $usr_pwd = $_POST["password"];
+        $sql = "SELECT * FROM Users WHERE id = '$usr_id' AND password = '$usr_pwd'";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION["id"] = $usr_id;
+            $_SESSION["user_real_name"] = $row["name"];
+            $_SESSION["role"] = $row["Role"];
+            echo "
+                <script>window.location.href = 'index.php?page=home';</script>;
+            ";
+        }
+        else {
+            $wrong_cred = "Wrong id or password.";
+        }
+    }
 ?>
 
 <h1 class="login-header">Login</h1>

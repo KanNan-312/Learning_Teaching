@@ -3,7 +3,7 @@
 	<hr>
 	<div class="row">
 		<?php
-			$id = '1952001';
+			$id = $_SESSION['id'];
 			$sql = "CALL showStudentCourse(".$id . ",". $semester . ")";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
@@ -19,6 +19,9 @@
 						</div>
 					";
 				}
+			}
+			else {
+				echo 'You have no course in this semester';
 			}
 		?>
 	</div>
