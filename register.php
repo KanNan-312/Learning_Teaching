@@ -1,7 +1,33 @@
+<?php
+	if(isset($_GET["class"]) and isset($_SESSION["id"]) and isset($_GET["credits"]) and isset($_GET["flag"])){
+		$class = $_GET["class"];
+		$id = $_SESSION["id"];
+		$credits = $_GET["credits"];
+		$flag = $_GET["flag"];
+		if($flag) {
+			$student_id = $_SESSION["id"];
+			$sql = "call studentCancel('$credits', '$id', '$class');";
+			echo "ez";
+			if(!$result = $conn->query($sql)) {
+				die($result->error);
+			}
+
+		}
+		else {
+			$student_id = $_SESSION["id"];
+			$sql = "call studentRegister('$credits', '$id', '$class');";
+			echo "no ez";
+			if(!$result = $conn->query($sql)) {
+				die($result->error);
+			}
+		}
+	}
+?>
+
 <div class="course-container">
 	<?php include "choose_semester.php" ?>
 	<hr>
-	<table id="register">
+	<table id="table">
 	<tr>
 		<th>Class</th>
 		<th>Subject</th>
@@ -9,18 +35,19 @@
 		<th>Select</th>
 	</tr>
 	<?php
-		$sql = 'select c.code as "Class", s.name as "Subject", s.num_credits as "Credits" 
-		from class c, subject s
-		where c.subject_code = s.code and c.semester = "202" limit 4;';
+		$student_id = $_SESSION["id"];
+		$sql = "call showRegisterPage($student_id);";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
+				$flag = $row['flag'];
 				echo "
 					<tr>
 						<td>".$row['Class']."</td>
 						<td>".$row['Subject']."</td>
 						<td>".$row['Credits']."</td>
-						<td><button>Submit</button></td>
+						<td><button><a class='no-style-hyperlink' href='index.php?page=register&class=".$row['Class']."&credits=".$row['Credits']."&flag=".$row['flag']."'>
+						". ($flag ? "Cancel" : "Submit") . "</a></button></td>
 					</tr>
 				";
 			}
