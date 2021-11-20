@@ -7,6 +7,10 @@
 	{
 		$direct = $_GET['page'];
 	}
+	else if(isset($_POST['page']))
+	{
+		$direct = $_POST['page'];
+	}
 ?>
 
 <html lang="en">
@@ -15,7 +19,10 @@
 </head>
 <body>
 	<?php
-		if($direct == "login") {
+		if($direct == "login" or $direct == "logout" or !isset($_SESSION["id"])) {
+			if($direct == "logout") {
+				session_destroy();
+			}
 			echo '<div class="login-page-container">';
 				include "login.php";
 			echo '</div>';

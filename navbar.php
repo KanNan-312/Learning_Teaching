@@ -4,14 +4,20 @@
 			<li class="nav-item">
 				<a class="nav-link" href="index.php?page=home">Home</a>
 			</li>
+			<?php if($_SESSION["role"] == "student") {?>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?page=course">Courses</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?page=register">Register</a>
+				</li>
+			<?php } else { ?>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?page=class">Manage Classes</a>
+				</li>
+			<?php } ?>
 			<li class="nav-item">
-				<a class="nav-link" href="index.php?page=course">Courses</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?page=register">Register</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="index.php?page=class">Manage Classes</a>
+				<a class="nav-link" href="index.php?page=logout">Log out</a>
 			</li>
 		</ul>
 	</div>
