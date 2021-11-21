@@ -1,5 +1,5 @@
 <div class="course-container">
-	<p style="font-size: 30px;"> Semester 211 </p>
+	<p style="font-size: 30px;">Student list</p>
 	<table id="table">
         <tr>
             <th>Name</th>

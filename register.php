@@ -18,7 +18,7 @@
 ?>
 
 <div class="course-container">
-	<p style="font-size: 30px;"> Semester 211 </p>
+	<p style="font-size: 30px;">Semester 211</p>
 	<table id="table">
 		<tr>
 			<th>Class</th>
