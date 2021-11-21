@@ -77,9 +77,9 @@
             <table id='table'>
                 <tr>
                     <th>ISBN</th>
-                    <th>Name</th>
-                    <th>Modify</th>
-                </tr>
+                    <th>Name</th>";
+                    if ($semester == "211") echo "<th>Modify</th>";
+                echo "</tr>
             ";
             $sql = "call showSyllabus('$code');";
             $result = $conn->query($sql);
@@ -88,14 +88,14 @@
                     echo "
                         <tr>
                             <td>".$row['ISBN']."</td>
-                            <td>".$row['Title']."</td>
-                            <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
-                            Remove</a></button></td>
-                        </tr>
+                            <td>".$row['Title']."</td>";
+                            if ($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
+                            Remove</a></button></td>";
+                        echo "</tr>
                     ";
                 }
             }
-            echo "
+            if ($semester == "211") echo "
                 <form action='index.php' action='get'>
                     <tr id='form-tr'>
                         <input id='page' name='page' value='course_info' type='hidden'>
@@ -105,8 +105,8 @@
                         <input id='action' name='action' value='add' type='hidden'>
                         <td><button type='submit'>Add</button></td>
                     </tr>
-                <form>
-            </table>
+                <form>";
+            echo "</table>
             <br>
             <hr>
             <a class='no-style-hyperlink' href='index.php?page=class_list&code=". $code. "&semester=" . $semester . "'> <div class='d-grid gap-2 col-6 mx-auto'>
