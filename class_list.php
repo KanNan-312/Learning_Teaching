@@ -1,6 +1,6 @@
 <div class="course-container">
     <?php
-    $code = $_GET['code'];
+        $code = $_GET['code'];
     ?>
     <p style="font-size: 30px;">Lecturer list</p>
 	<table id="table">
@@ -10,9 +10,8 @@
             <th>Role</th>
         </tr>
         <?php
-            
             $sql = "call showTeacherList('$code');";
-            $result = $conn -> query($sql);
+            $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result -> fetch_assoc())
                 {
@@ -36,11 +35,9 @@
             <th>Email</th>
         </tr>
         <?php
+            $conn->next_result(); // Fix multiple queries error
             $sql = "call showStudentList('$code');";
-            $result = $conn -> query($sql);
-            echo $sql;
-            if (!$result)
-                die(!$result->error);
+            $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result -> fetch_assoc())
                 {
