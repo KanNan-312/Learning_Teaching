@@ -3,16 +3,8 @@
 		$semester = $_GET["semester"];
 	}
 	else {
-		$sql = "SELECT DISTINCT Semester FROM CLASS ORDER BY Semester DESC LIMIT 0,1";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0) {
-			$semester = $result->fetch_assoc()["Semester"];
-		}
-		else {
-			die("Can't find any semester");
-		}
+		$semester = '211';
 	}
-	
 ?>
 <script>
 	$(function(){
@@ -33,35 +25,68 @@
 		<select id="dynamic_select">
 			<option value="" selected>Choose semester</option>
 			<?php
-				$sql = "SELECT DISTINCT Semester FROM CLASS ORDER BY Semester DESC";
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) {
-					while($row = $result->fetch_assoc()) {
+				$sems = ['191','192','201','202','211'];
+					foreach($sems as $sem) {
 						echo "
-							<option value='index.php?page=course&semester=" . $row["Semester"] . "'>" . $row["Semester"] . "</option>
+							<option value='index.php?page=course&semester=" . $sem . "'>" . $sem . "</option>
 						";
 					}
-				}
+
 			?>
 		</select>
 	</div>
 	<hr>
 	<div class="row">
 		<?php
-			$sql = "CALL showStudentCourse(" . $_SESSION['id'] . ",". $semester . ")";
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0) {
-				// output data of each row
-				while($row = $result->fetch_assoc()) {
-					echo "
-						<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
-							<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
-								<p><b>Subject: " . $row['Subject'] . "(" . $row['Subject_id'] . ")</b></p>
-								<hr>
-								<p>Class code: " . $row['Code'] . "</p>
-							</a></div>
-						</div>
-					";
+			if ($_SESSION['role'] == 'student')
+			{
+				$sql = "CALL showStudentCourse(" . $_SESSION['id'] . ",". $semester . ")";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					// output data of each row
+					while($row = $result->fetch_assoc()) {
+						echo "
+							<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
+								<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
+									<p><b>Subject: " . $row['Subject'] . "(" . $row['Subject_id'] . ")</b></p>
+									<hr>
+									<p>Class code: " . $row['Code'] . "</p>
+								</a></div>
+							</div>
+						";
+					}
+
+					// Show total number of credits
+					// $id = $_SESSION['id'];
+					// $sql2 = "SELECT * from learning_teaching.studystatus where Student_id=$id and Semester=$semester";
+					// $result = $conn->query($sql2);
+					// if ($result -> num_rows > 0 )
+					// {
+					// 	$row = $result -> fetch_assoc();
+					// 	echo "<b> Total number of credits: </b>" . $row['Num_credits'];
+					// }
+				}
+				else {
+					echo "<p>You have no class in this semester</p>";
+				}
+			}
+			else if ($_SESSION['role'] == 'teacher') {
+				echo "This is teacher role";
+				$sql = "CALL GetClassOfTeacher(" . $_SESSION['id'] . ",". $semester . ")";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					// output data of each row
+					while($row = $result->fetch_assoc()) {
+						echo "
+							<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
+								<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
+									<p><b>Subject: " . $row['Subject'] . "(" . $row['Subject_code'] . ")</b></p>
+									<hr>
+									<p>Class code: " . $row['Code'] . "</p>
+								</a></div>
+							</div>
+						";
+					}
 				}
 			}
 		?>
