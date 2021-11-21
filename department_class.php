@@ -1,7 +1,7 @@
 <div class="course-container">
     <?php
-        $semester = $_GET['semester'];
         $subject_code = $_GET['code'];
+        $semester = $_GET['semester'];
         if(isset($_GET["action"])) {
             $class_code = $_GET["class_code"];
             if($_GET["action"] == "add") {
@@ -13,7 +13,7 @@
                 }
             }
             else if($_GET["action"] == "remove") {
-                $sql = "";
+                $sql = "call RemoveClass('$class_code')";
                 if(!$result = $conn->query($sql)) {
                     die("Can't remove syllabus! " . $result->error);
                 }
@@ -24,7 +24,7 @@
             echo "<script>window.history.pushState('', '', 'index.php?page=class_list');</script>";
         }
     ?>
-    <p style="font-size: 30px;"><b>All classes</b>: <?php echo $_GET['name']; ?></p>
+    <p style="font-size: 30px;"><b>All classes</b>: <?php echo $_GET['code']; ?></p>
 	<table id="table">
         <tr>
             <th>Class ID</th>
@@ -41,7 +41,8 @@
                     <tr>
                         <td>". $row['Class']. "</td>
                         <td><a href='index.php?page=class_list&code=". $row['Class'] . "&semester=" . $semester ."'><button>Class detail</button></a></td>";
-                        if($semester == "211" && $cnt > 1) echo "<td><button><a class='no-style-hyperlink' href='index.php?page=department_class&class_id=".$row['Class']."&action=remove'>
+                        if($semester == "211" && $cnt > 1) echo "<td><button><a class='no-style-hyperlink' href='index.php?page=department_class&class_code=".$row['Class']. "&semester=" .
+                        $semester . "&code=" . $subject_code . "&action=remove'>
                         Remove</a></button></td>";
                     "</tr>
                     ";
@@ -60,7 +61,8 @@
                     <form action='index.php' action='get'>
                         <tr id='form-tr'>
                             <input id='page' name='page' value='department_class' type='hidden'>
-                            <input id='page' name='page' value='department_class' type='hidden'>
+                            <input id='semester' name='semester' value='$semester' type='hidden'>
+                            <input id='code' name='code' value='$subject_code' type='hidden'>
                             <td><input id='class_code' name='class_code' type='text' placeholder='Class Code ...'></td>
                             <td><input id='teacher_id' name='teacher_id' type='text' placeholder='Teacher ID ...'></td>
                             <input id='action' name='action' value='add' type='hidden'>

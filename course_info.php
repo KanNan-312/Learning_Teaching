@@ -89,7 +89,8 @@
                         <tr>
                             <td>".$row['ISBN']."</td>
                             <td>".$row['Title']."</td>";
-                            if ($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
+                            if ($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&code='$code'
+                            &semester='$semester'&subject='$subject'&action=remove'>
                             Remove</a></button></td>";
                         echo "</tr>
                     ";
@@ -101,6 +102,8 @@
                         <input id='page' name='page' value='course_info' type='hidden'>
                         <td><input id='isbn' name='isbn' type='text' placeholder='ISBN ...'></td>
                         <td><input id='title' name='title' type='text' placeholder='Title ...'></td>
+                        <input id = 'semester' name = 'semester' value = $semester type = 'hidden'>
+                        <input id = 'subject' name = 'subject' value = $subject type = 'hidden'>
                         <input id = 'code' name = 'code' value = $code type = 'hidden'>
                         <input id='action' name='action' value='add' type='hidden'>
                         <td><button type='submit'>Add</button></td>

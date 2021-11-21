@@ -255,6 +255,7 @@ select count(*) as 'students'
 from registers r, class c
 where r.class_code = c.code and c.subject_code = 'MT1003' and c.semester = '201';
 
+select * from users;
 
 
 
@@ -296,4 +297,35 @@ delimiter ;
 call totalStudentClass('CO1005_CC02_191');
 
 
+-- add new class by department
 
+DROP PROCEDURE IF EXISTS AddClass;
+DELIMITER //
+CREATE PROCEDURE `AddClass`(IN Class_code VARCHAR(255), Semester VARCHAR(255), Subject_code VARCHAR(255), teacher_id VARCHAR(255))
+BEGIN
+	insert into class(Code, Semester, Subject_code, main_teacher_id) values (class_code, semester, subject_code, teacher_id);
+    insert into taught_by(Class_code, teacher_id, role) values (class_code, teacher_id, 'Main');
+END //
+delimiter ;
+call AddClass('CO1005_CC02_191');
+
+DROP PROCEDURE IF EXISTS RemoveClass;
+DELIMITER //
+CREATE PROCEDURE `RemoveClass`(IN Class_code VARCHAR(255))
+BEGIN
+	delete from taught_by tb where tb.class_code = Class_code;
+    delete from registers r where r.class_code = Class_code;
+    delete from is_assigned ia where ia.class_code = class_code;
+	delete from class c where c.code = class_code;
+END //
+delimiter ;
+call RemoveClass('CO3049_CC03_211');
+
+
+select * from users;
+select * from taught_by;
+select distinct s.num_credits from class c, subject s where c.code = Class_code and c.subject_code = s.code into credits;
+
+select c.main_teacher_id from class c where c.semester = '211';
+
+call showSyllabus('CO3049_CC01_211');

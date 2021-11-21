@@ -39,8 +39,7 @@
                 }
             }
             echo "</table>";
-
-            echo "Statistics: <br>";
+            
             // total subject in one semester
             $conn -> next_result();
             $sql = "CALL totalSubjectFaculty('$faculty', '$semester')";
