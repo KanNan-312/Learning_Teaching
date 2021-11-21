@@ -24,9 +24,12 @@
             $sql = "SELECT DISTINCT Semester FROM CLASS ORDER BY Semester DESC";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
+                if(!isset($more)) {
+                    $more = "";
+                }
                 while($row = $result->fetch_assoc()) {
                     echo "
-                        <option value='index.php?page=" . $direct . "&semester=" . $row["Semester"] . "'>" . $row["Semester"] . "</option>
+                        <option value='index.php?page=" . $direct . "&semester=" . $row["Semester"] . "$more'>" . $row["Semester"] . "</option>
                     ";
                 }
             }
