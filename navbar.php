@@ -18,6 +18,9 @@
 						<a class="nav-link" href="index.php?page=course"><i class="fa fa-list" style="margin-right: 10px;"></i>Courses</a>
 					</li>
 				<?php } else if ($_SESSION["role"] == "department"){ ?>
+					<li class="nav-item">
+						<a class="nav-link" href="index.php?page=department_course"><i class="fa fa-list" style="margin-right: 10px;"></i>Departments</a>
+					</li>
 				<?php } else if ($_SESSION["role"] == "office"){ ?>
 					<li class="nav-item">
 						<a class="nav-link" href="index.php?page=office_department"><i class="fa fa-list" style="margin-right: 10px;"></i>Departments</a>

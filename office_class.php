@@ -3,11 +3,10 @@
         $semester = $_GET['semester'];
         $subject_code = $_GET['code'];
     ?>
-    <hr>
     <p style="font-size: 30px;"><b>Classes list of</b>: <?php echo $_GET['name']; ?></p>
 	<table id="table">
         <tr>
-            <th>Class</th>
+            <th>Class ID</th>
             <th></th>
         </tr>
     <?php
