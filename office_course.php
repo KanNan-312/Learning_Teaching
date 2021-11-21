@@ -1,4 +1,5 @@
 <div class="course-container">
+
     <?php
         $faculty = $_GET["name"];
         if($faculty == "Computer Science ") {
