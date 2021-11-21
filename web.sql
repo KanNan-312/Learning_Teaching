@@ -1,3 +1,4 @@
+-- user
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id varchar(255)NOT NULL,
@@ -22,11 +23,15 @@ INSERT INTO users (id, email_id, name, phone, password, Role) VALUES
 ('1', 'tho.quan@hcmut.edu.vn', 'Quản Thành Thơ', 1000000001, '123456789', 'teacher'),
 ('2', 'trung.mai@hcmut.edu.vn', 'Mai Đức Trung', 1000000002, '123456789', 'teacher'),
 ('3', 'anh.tran@hcmut.edu.vn', 'Trần Tuấn Anh', 1000000003, '123456789', 'teacher'),
+('5','binh.kieu@hcmut.edu.vn', 'Kiều Đỗ Nguyên Bình', 1000000005, '123456789', 'teacher'),
+('10','cuong.pham@hcmut.edu.vn', 'Phạm Quốc Cường', 1000000010, '123456789', 'teacher'),
 ('admin', 'office@gmail.com' , 'Office', 0, 'admin', 'office'),
 ('CS', 'cs@gmail.com' , 'Faculty of CS', 0, 'cs', 'department'),
 ('ME', 'me@gmail.com' , 'Faculty of ME', 0, 'me', 'department'),
 ('AS', 'as@gmail.com' , 'Faculty of AS', 0, 'as', 'department');
 
+
+select * from users;
 -- student
 -- course page
 drop procedure if exists ShowCourseInfo;
@@ -195,6 +200,33 @@ delimiter ;
 
 call totalSubjectFaculty('Computer Science & Engineering', '202'); 
 
+DROP PROCEDURE IF EXISTS totalClassFaculty;
+DELIMITER //
+CREATE PROCEDURE `totalClassFaculty`(IN Faculty VARCHAR(255) ,Semester VARCHAR(255))
+BEGIN
+	select count(*) as 'no_classes' 
+    from class c,subject s 
+    where c.subject_code = s.code and s.faculty = faculty and c.semester = Semester;
+END //
+delimiter ;
+
+call totalClassFaculty('Computer Science & Engineering', '202'); 
+
+DROP PROCEDURE IF EXISTS totalStudentFaculty;
+DELIMITER //
+CREATE PROCEDURE `totalStudentFaculty`(IN Faculty VARCHAR(255) ,Semester VARCHAR(255))
+BEGIN
+	select count(*) as 'no_students' 
+    from registers r, class c, subject s 
+    where r.class_code = c.code and c.subject_code = s.code and s.faculty = faculty and c.semester = Semester;
+END //
+delimiter ;
+
+call totalStudentFaculty('Computer Science & Engineering', '202'); 
+
+
+
+
 
 DROP PROCEDURE IF EXISTS totalClassSubject;
 DELIMITER //
@@ -252,3 +284,16 @@ END //
 delimiter ;
 
 call showTeacherList('CO1005_CC02_191');
+
+DROP PROCEDURE IF EXISTS totalStudentClass;
+DELIMITER //
+CREATE PROCEDURE `totalStudentClass`(IN Class_code VARCHAR(255))
+BEGIN
+	select count(*) as 'Students'
+    from registers r where r.class_code = Class_code ;
+END //
+delimiter ;
+call totalStudentClass('CO1005_CC02_191');
+
+
+

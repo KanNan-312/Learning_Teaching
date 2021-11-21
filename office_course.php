@@ -38,6 +38,9 @@
                 }
             }
             echo "</table>";
+
+            echo "Statistics: <br>";
+            // total subject in one semester
             $conn -> next_result();
             $sql = "CALL totalSubjectFaculty('$faculty', '$semester')";
             $result = $conn->query($sql);
@@ -46,6 +49,17 @@
                 $count = $row['no_subjects'];
                 echo "<hr><p style='font-size: 30px;'><b>Total number of subjects</b>: $count</p>";
             }
+            // total classes in one semester
+            $conn -> next_result();
+            $sql = "CALL totalClassFaculty('$faculty', '$semester')";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result -> fetch_assoc();
+                $count = $row['no_classes'];
+                echo "<hr><p style='font-size: 30px;'><b>Total number of classes</b>: $count</p>";
+            }
+
+            // total student in one semester
 
         }
     ?>
