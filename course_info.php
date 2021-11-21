@@ -1,14 +1,17 @@
 <?php
     if(isset($_GET["action"])) {
+        $code = $_GET['code'];
+        $isbn = $_GET['isbn'];
         if($_GET["action"] == "add") {
-            $sql = "INSERT INTO test_syllabus(isbn, name) values('".$_GET['isbn']."', '".$_GET['name']."');";
+            $title = $_GET['title'];
+            $sql = "call addSyllabus('$code','$isbn','$title');";
             if(!$result = $conn->query($sql)) {
                 print($sql);
                 die("Can't add syllabus! " . $result->error);
             }
         }
         else if($_GET["action"] == "remove") {
-            $sql = "DELETE FROM test_syllabus WHERE isbn = ".$_GET['isbn'].";";
+            $sql = "call deleteSyllabus('$code', '$isbn');";
             if(!$result = $conn->query($sql)) {
                 die("Can't remove syllabus! " . $result->error);
             }
@@ -57,6 +60,11 @@
             }
         }
         else if($_SESSION["role"] == "teacher") {
+            $code = $_GET['code'];
+            $subject = $_GET['subject'];
+            $student_id = $_SESSION["id"];
+            echo "Class code:" . $code; 
+            echo "<br>Subject:" . $subject;
             echo "
                 <table id='table'>
                 <tr>
@@ -64,16 +72,16 @@
                     <th>Name</th>
                     <th>Status</th>
                 </tr>";
-                $student_id = $_SESSION["id"];
-                $sql = "SELECT * FROM learning_teaching.test_syllabus;";
+
+                $sql = "call showSyllabus('$code');";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo "
                             <tr>
-                                <td>".$row['isbn']."</td>
-                                <td>".$row['name']."</td>
-                                <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['isbn']."&action=remove'>
+                                <td>".$row['ISBN']."</td>
+                                <td>".$row['Title']."</td>
+                                <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
                                 Remove</a></button></td>
                             </tr>
                         ";
@@ -84,12 +92,18 @@
                         <tr id='form-tr'>
                             <input id='page' name='page' value='course_info' type='hidden'>
                             <td><input id='isbn' name='isbn' type='text' placeholder='ISBN ...'></td>
-                            <td><input id='name' name='name' type='text' placeholder='Syllabus ...'></td>
+                            <td><input id='title' name='title' type='text' placeholder='Title ...'></td>
+                            <input id = 'code' name = 'code' value = $code type = 'hidden'>
                             <input id='action' name='action' value='add' type='hidden'>
                             <td><button type='submit'>Add</button></td>
                         </tr>
                     <form>
             </table>";
+
+            echo 
+            "
+                <a class='no-style-hyperlink' href='index.php?page=class_list&code=".$code. "'> View list </a>
+            ";
         }
     ?>
 </div>

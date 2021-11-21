@@ -54,7 +54,7 @@
 					while($row = $result->fetch_assoc()) {
 						echo "
 							<div class='col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4'>
-								<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "' class='no-style-hyperlink'>
+								<div class='course-box'><a href='index.php?page=course_info&code=" . $row['Code'] . "&subject=" .$row['Subject'] . "' class='no-style-hyperlink'>
 									<p><b>Subject: " . $row['Subject'] . "(" . $row['Subject_code'] . ")</b></p>
 									<hr>
 									<p>Class code: " . $row['Code'] . "</p>
