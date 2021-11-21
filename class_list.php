@@ -74,6 +74,7 @@
             <th>Name</th>
             <th>Student ID</th>
             <th>Email</th>
+            <?php if($semester == "211") echo "<th></th>" ?>
         </tr>
         <?php
             $conn->next_result(); // Fix multiple queries error
@@ -86,26 +87,28 @@
                     <tr>
                         <td>".$row['Name']."</td>
                         <td>".$row['ID']."</td>
-                        <td>".$row['Email']."</td>
-                        <td><button><a class='no-style-hyperlink' href='index.php?page=class_list&student_id=".$row['ID']. "&semester=". $semester
+                        <td>".$row['Email']."</td>";
+                        if($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=class_list&student_id=".$row['ID']. "&semester=". $semester
                          ."&action=remove&code=$code'>
-                        Remove</a></button></td>
-                    </tr>
+                        Remove</a></button></td>";
+                    echo "</tr>
                     ";
                 }
             }
-            echo "
+            if($semester == "211") echo "
                 <form action='index.php' action='get'>
                     <tr id='form-tr'>
                         <input id='page' name='page' value='class_list' type='hidden'>
+                        <td></td>
                         <td><input id='student_id' name='student_id' type='text' placeholder='ID ...'></td>
+                        <td></td>
                         <input id = 'code' name = 'code' value = $code type = 'hidden'>
                         <input id = 'semester' name = 'semester' value = $semester type = 'hidden'>
                         <input id='action' name='action' value='add' type='hidden'>
                         <td><button type='submit'>Add</button></td>
                     </tr>
-                <form>
-                </table>
+                <form>";
+                echo "</table>
             ";
 
             // total number of students of class
