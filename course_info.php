@@ -110,7 +110,7 @@
             <hr>
             <a class='no-style-hyperlink' href='index.php?page=class_list&code=".$code. "'> <div class='d-grid gap-2 col-6 mx-auto'>
                 <button class='btn btn-primary' type='button'>
-                    Student list
+                    Class information
                 </button>
             </div></a>
             ";

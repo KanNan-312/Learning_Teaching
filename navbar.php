@@ -12,10 +12,6 @@
 				<li class="nav-item">
 					<a class="nav-link" href="index.php?page=register"><i class="fa fa-book" style="margin-right: 10px;"></i>Register</a>
 				</li>
-			<?php } else { ?>
-				<li class="nav-item">
-					<a class="nav-link" href="index.php?page=class">Manage Classes</a>
-				</li>
 			<?php } ?>
 			
 		</ul>
