@@ -1,5 +1,10 @@
 <div class="course-container">
     <?php
+        // if office va semester = 211 display them cai cuc student (remove voi add).
+    ?>
+    <?php
+        $semester = $_GET['semester'];
+        echo $semester;
         $code = $_GET['code'];
     ?>
     <p style="font-size: 30px;">Lecturer list</p>

@@ -4,7 +4,7 @@
         if($faculty == "Computer Science ") {
             $faculty = "Computer Science & Engineering";
         }
-        if($faculty == "Applied Math ") {
+        else if($faculty == "Applied Math ") {
             $faculty = "Applied Math & Science";
         }
 
@@ -13,11 +13,11 @@
 
     ?>
     <hr>
-    <p style="font-size: 30px;">Course list of <?php echo $faculty ?></p>
+    <p style="font-size: 30px;">All subjects</p>
 	<table id="table">
         <tr>
-            <th>Course code</th>
-            <th>Course name</th>
+            <th>Subject code</th>
+            <th>Subject name</th>
         </tr>
     <?php
         if ($_SESSION['role'] == 'office') {
@@ -25,16 +25,26 @@
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    $code = $row["Code"];
-                    $name = $row["Name"];
+                     $name = $row["Name"];
+                     $code = $row["Code"];
                     echo "
                     <tr>
-                        <td>$code</td>
                         <td>$name</td>
+                        <td>$code</td>
+                        <td><a href='index.php?page=office_class&code=$code&semester=". $semester . "&name=" . $name . "'><button>View all classes</button></a></td>
                     </tr>
                     ";
                 }
             }
+            $conn -> next_result();
+            $sql = "CALL totalSubjectFaculty('$faculty', '$semester')";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result -> fetch_assoc();
+                $count = $row['no_subjects'];
+                echo "<br><br>Total number of subjects:". $count ;
+            }
+
         }
     ?>
 </div>

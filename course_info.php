@@ -1,4 +1,5 @@
 <?php
+    $semester = $_GET['semester'];
     if(isset($_GET["action"])) {
         $code = $_GET['code'];
         $isbn = $_GET['isbn'];
@@ -108,7 +109,7 @@
             </table>
             <br>
             <hr>
-            <a class='no-style-hyperlink' href='index.php?page=class_list&code=".$code. "'> <div class='d-grid gap-2 col-6 mx-auto'>
+            <a class='no-style-hyperlink' href='index.php?page=class_list&code=". $code. "&semester=" . $semester . "'> <div class='d-grid gap-2 col-6 mx-auto'>
                 <button class='btn btn-primary' type='button'>
                     Class information
                 </button>
