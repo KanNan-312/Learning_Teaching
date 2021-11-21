@@ -4,8 +4,8 @@
     ?>
     <?php
         $semester = $_GET['semester'];
-        echo $semester;
         $code = $_GET['code'];
+        $can_modify_student = ($_SESSION["role"] == "office" and $semester == "211") ? true : false;
     ?>
     <p style="font-size: 30px;">Lecturer list</p>
 	<table id="table">
@@ -38,6 +38,7 @@
             <th>Name</th>
             <th>Student ID</th>
             <th>Email</th>
+            <?php if($can_modify_student) echo "<th>Modify</th>"; ?>
         </tr>
         <?php
             $conn->next_result(); // Fix multiple queries error
@@ -46,13 +47,15 @@
             if ($result->num_rows > 0) {
                 while($row = $result -> fetch_assoc())
                 {
-                    echo "
-                    <tr>
-                        <td>".$row['Name']."</td>
-                        <td>".$row['ID']."</td>
-                        <td>".$row['Email']."</td>
-                    </tr>
-                    ";
+                    // echo "
+                    // <tr>
+                    //     <td>".$row['Name']."</td>
+                    //     <td>".$row['ID']."</td>
+                    //     <td>".$row['Email']."</td>
+                    //     <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
+                    //     Remove</a></button></td>
+                    // </tr>
+                    // ";
                 }
             }
         ?>

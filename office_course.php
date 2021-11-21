@@ -13,11 +13,12 @@
 
     ?>
     <hr>
-    <p style="font-size: 30px;">All subjects</p>
+    <p style="font-size: 30px;"><b>All subjects</b></p>
 	<table id="table">
         <tr>
             <th>Subject code</th>
             <th>Subject name</th>
+            <th></th>
         </tr>
     <?php
         if ($_SESSION['role'] == 'office') {
@@ -36,13 +37,14 @@
                     ";
                 }
             }
+            echo "</table>";
             $conn -> next_result();
             $sql = "CALL totalSubjectFaculty('$faculty', '$semester')";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result -> fetch_assoc();
                 $count = $row['no_subjects'];
-                echo "<br><br>Total number of subjects:". $count ;
+                echo "<hr><p style='font-size: 30px;'><b>Total number of subjects</b>: $count</p>";
             }
 
         }

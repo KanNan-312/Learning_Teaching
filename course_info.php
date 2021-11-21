@@ -78,7 +78,7 @@
                 <tr>
                     <th>ISBN</th>
                     <th>Name</th>
-                    <th>Status</th>
+                    <th>Modify</th>
                 </tr>
             ";
             $sql = "call showSyllabus('$code');";

@@ -4,14 +4,13 @@
         $subject_code = $_GET['code'];
     ?>
     <hr>
-    <p style="font-size: 30px;">All classes</p>
+    <p style="font-size: 30px;"><b>Classes list of</b>: <?php echo $_GET['name']; ?></p>
 	<table id="table">
         <tr>
             <th>Class</th>
             <th></th>
         </tr>
     <?php
-        echo "Classes list: " . $_GET['name'];
         if ($_SESSION['role'] == 'office') {
             $sql = "CALL showClassesFaculty('$subject_code', '$semester')";
             $result = $conn->query($sql);
@@ -25,6 +24,7 @@
                     ";
                 }
             }
+            echo "</table><hr>";
             // total class of subject
             $conn -> next_result();
             $sql = "CALL totalClassSubject('$subject_code', '$semester')";
@@ -32,7 +32,7 @@
             if ($result->num_rows > 0) {
                 $row = $result -> fetch_assoc();
                 $count = $row['no_classes'];
-                echo "<br><br>Total number of classes:". $count ;
+                echo "<p style='font-size: 30px;'><b>Total number of classes</b>: $count</p>";
             }
             // total student of subject
             $conn -> next_result();
@@ -41,7 +41,7 @@
             if ($result->num_rows > 0) {
                 $row = $result -> fetch_assoc();
                 $count = $row['students'];
-                echo "<br><br>Total number of :". $count ;
+                echo "<p style='font-size: 30px;'><b>Total number of students</b>: $count</p>";
             }
         }
     ?>
