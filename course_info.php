@@ -63,46 +63,56 @@
             $code = $_GET['code'];
             $subject = $_GET['subject'];
             $student_id = $_SESSION["id"];
-            echo "Class code:" . $code; 
-            echo "<br>Subject:" . $subject;
-            echo "
-                <table id='table'>
+
+            echo "<p class='info-header'><b>Class code:</b></p>
+            <p class='info-value'>$code</p>
+            <br>
+            <hr>
+            <p class='info-header'><b>Subject:</b></p>
+            <p class='info-value'>$subject</p>
+            <br>
+            <hr>
+            <p class='info-header'><b>Syllabus:</b></p>
+            <table id='table'>
                 <tr>
                     <th>ISBN</th>
                     <th>Name</th>
                     <th>Status</th>
-                </tr>";
-
-                $sql = "call showSyllabus('$code');";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "
-                            <tr>
-                                <td>".$row['ISBN']."</td>
-                                <td>".$row['Title']."</td>
-                                <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
-                                Remove</a></button></td>
-                            </tr>
-                        ";
-                    }
-                }
-                echo "
-                    <form action='index.php' action='get'>
-                        <tr id='form-tr'>
-                            <input id='page' name='page' value='course_info' type='hidden'>
-                            <td><input id='isbn' name='isbn' type='text' placeholder='ISBN ...'></td>
-                            <td><input id='title' name='title' type='text' placeholder='Title ...'></td>
-                            <input id = 'code' name = 'code' value = $code type = 'hidden'>
-                            <input id='action' name='action' value='add' type='hidden'>
-                            <td><button type='submit'>Add</button></td>
+                </tr>
+            ";
+            $sql = "call showSyllabus('$code');";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "
+                        <tr>
+                            <td>".$row['ISBN']."</td>
+                            <td>".$row['Title']."</td>
+                            <td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&action=remove&code=$code'>
+                            Remove</a></button></td>
                         </tr>
-                    <form>
-            </table>";
-
-            echo 
-            "
-                <a class='no-style-hyperlink' href='index.php?page=class_list&code=".$code. "'> View list </a>
+                    ";
+                }
+            }
+            echo "
+                <form action='index.php' action='get'>
+                    <tr id='form-tr'>
+                        <input id='page' name='page' value='course_info' type='hidden'>
+                        <td><input id='isbn' name='isbn' type='text' placeholder='ISBN ...'></td>
+                        <td><input id='title' name='title' type='text' placeholder='Title ...'></td>
+                        <input id = 'code' name = 'code' value = $code type = 'hidden'>
+                        <input id='action' name='action' value='add' type='hidden'>
+                        <td><button type='submit'>Add</button></td>
+                    </tr>
+                <form>
+            </table>
+            <br>
+            <hr>
+            <a class='no-style-hyperlink' href='index.php?page=class_list&code=".$code. "'> <div class='d-grid gap-2 col-6 mx-auto'>
+                <button class='btn btn-primary' type='button'>
+                    Student list
+                </button>
+            </div></a>
             ";
         }
     ?>
