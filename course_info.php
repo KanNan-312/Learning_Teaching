@@ -1,5 +1,6 @@
 <?php
-    $semester = $_GET['semester'];
+    if ($_SESSION["role"] == 'teacher')
+        $semester = $_GET['semester'];
     if(isset($_GET["action"])) {
         $code = $_GET['code'];
         $isbn = $_GET['isbn'];
@@ -89,8 +90,8 @@
                         <tr>
                             <td>".$row['ISBN']."</td>
                             <td>".$row['Title']."</td>";
-                            if ($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&code='$code'
-                            &semester='$semester'&subject='$subject'&action=remove'>
+                            if ($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=course_info&isbn=".$row['ISBN']."&code=" . $code .
+                            "&semester=" . $semester . "&subject=" . $subject . "&action=remove'>
                             Remove</a></button></td>";
                         echo "</tr>
                     ";

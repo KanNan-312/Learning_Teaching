@@ -4,7 +4,7 @@
         $code = $_GET['code'];
         // echo $semester;
         
-        $can_modify_student = ($_SESSION["role"] == "office" and $semester == "211") ? true : false;
+        $can_modify_student = ($_SESSION["role"] === "office" and $semester === "211") ? true : false;
         if(isset($_GET["action"])) {
             // Get number of subject credits
             $sql = "select distinct s.num_credits from class c, subject s where c.code = '$code' and c.subject_code = s.code;";
@@ -32,7 +32,6 @@
                 $conn -> next_result();
                 $student_id = $_GET["student_id"];
                 $sql = "call studentCancel ($credits, '$student_id', '$code')";
-                echo $sql;
                 if(!$result = $conn->query($sql)) {
                     die("Can't remove student! " . $result->error);
                 }
@@ -74,7 +73,7 @@
             <th>Name</th>
             <th>Student ID</th>
             <th>Email</th>
-            <?php if($semester == "211") echo "<th></th>" ?>
+            <?php if($can_modify_student == True) echo "<th></th>" ?>
         </tr>
         <?php
             $conn->next_result(); // Fix multiple queries error
@@ -88,14 +87,14 @@
                         <td>".$row['Name']."</td>
                         <td>".$row['ID']."</td>
                         <td>".$row['Email']."</td>";
-                        if($semester == "211") echo "<td><button><a class='no-style-hyperlink' href='index.php?page=class_list&student_id=".$row['ID']. "&semester=". $semester
+                        if($can_modify_student == True) echo "<td><button><a class='no-style-hyperlink' href='index.php?page=class_list&student_id=".$row['ID']. "&semester=". $semester
                          ."&action=remove&code=$code'>
                         Remove</a></button></td>";
                     echo "</tr>
                     ";
                 }
             }
-            if($semester == "211") echo "
+            if($can_modify_student == True) echo "
                 <form action='index.php' action='get'>
                     <tr id='form-tr'>
                         <input id='page' name='page' value='class_list' type='hidden'>

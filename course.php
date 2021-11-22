@@ -7,7 +7,7 @@
 	}
 ?>
 <div class="course-container">
-	<p style="float: left; margin-right: 10px; font-size: 30px;"><b>Current semester:</b></p>
+	<p style="float: left; margin-right: 10px; font-size: 30px;"><b>Semester:</b></p>
 	<p style="font-size: 30px;"><?php echo $semester ?>
 	<div class="select-dropdown">
 		<select id="dynamic_select">
@@ -62,6 +62,9 @@
 							</div>
 						";
 					}
+				}
+				else {
+					echo "<p>You have no class in this semester</p>";
 				}
 			}
 		?>
